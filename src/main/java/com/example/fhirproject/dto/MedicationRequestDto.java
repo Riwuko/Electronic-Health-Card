@@ -10,7 +10,7 @@ public class MedicationRequestDto extends ResourceDto {
     private String description;
     private String date;
 
-    MedicationRequestDto(MedicationRequest resource) {
+    public MedicationRequestDto(MedicationRequest resource) {
         super(resource);
         setStatus(String.valueOf(resource.getStatus()));
         setDescription(resource.getMedicationCodeableConcept().getText());
