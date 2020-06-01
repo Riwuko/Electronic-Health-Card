@@ -14,4 +14,5 @@ public interface DataServerDao {
 
     ArrayList<MedicationRequest> getPatientMedicationRequest(String index);
 
+    Patient getPatientById(String id);
 }

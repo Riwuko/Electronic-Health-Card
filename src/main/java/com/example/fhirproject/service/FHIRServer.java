@@ -37,6 +37,10 @@ public class FHIRServer implements DataServerDao {
         return getResource(Patient.class, null, null);
     }
 
+    public Patient getPatientById(String index){
+        return client.read().resource(Patient.class).withId(index).execute();
+    }
+
     public ArrayList<Observation> getPatientObservationData(String index){
         ICriterion condition = Observation.PATIENT.hasId(index);
         IParam param = Observation.DATE;
