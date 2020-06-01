@@ -25,7 +25,6 @@ public class PatientDto extends ResourceDto{
 
     public ArrayList<String> getPatientFullData(){
         ArrayList<String> patientFullData = new ArrayList<>();
-        patientFullData.add(super.getId());
         patientFullData.add(name);
         patientFullData.add(familyName);
         patientFullData.add(gender);
