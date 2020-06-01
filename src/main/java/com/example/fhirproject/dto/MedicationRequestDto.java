@@ -2,6 +2,8 @@ package com.example.fhirproject.dto;
 
 import org.hl7.fhir.r4.model.MedicationRequest;
 
+import java.util.ArrayList;
+
 public class MedicationRequestDto extends ResourceDto {
 
     private String status;
@@ -12,7 +14,17 @@ public class MedicationRequestDto extends ResourceDto {
         super(resource);
         setStatus(String.valueOf(resource.getStatus()));
         setDescription(resource.getMedicationCodeableConcept().getText());
+        if (description==null) setDescription("No description yet");
         setDate(resource.getAuthoredOnElement().toHumanDisplay());
+    }
+
+    public ArrayList<String> getMedicationRequestFullData() {
+        ArrayList<String> medicationRequestFullData = new ArrayList<>();
+        medicationRequestFullData.add(super.getId());
+        medicationRequestFullData.add(status);
+        medicationRequestFullData.add(description);
+        medicationRequestFullData.add(date);
+        return medicationRequestFullData;
     }
 
     public String getStatus() {
