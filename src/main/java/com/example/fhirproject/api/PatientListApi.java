@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/patients")
@@ -22,21 +23,19 @@ public class PatientListApi {
     ArrayList<PatientDto> patientsList;
 
     @GetMapping
-    public ArrayList<PatientDto> patientList() {
+    public ArrayList<PatientDto> patientsList() {
         try{
-            ArrayList<PatientDto> patientsList = new ArrayList<>();
             ArrayList<Patient> patientsResources = dataServer.getPatientsData();
-            for (Patient patientsResource : patientsResources) {
-                PatientDto patientDto = new PatientDto(patientsResource);
-                System.out.println(patientDto.getPatientFullData());
-                patientsList.add(patientDto);
-            }
+            ArrayList<PatientDto> patientsList = (ArrayList<PatientDto>) patientsResources.stream()
+                    .map(PatientDto::new)
+                    .collect(Collectors.toList());
             return patientsList;
 
         }catch (Exception e){
             System.out.println("Error getting Patients Data");
+            return new ArrayList<>();
         }
-        return new ArrayList<>();
+
     }
 
 
