@@ -37,6 +37,8 @@ public class FHIRServer implements DataServerDao {
         return getResource(Patient.class, null, null);
     }
 
+    public ArrayList<Patient> getPatientsFilteredData(ICriterion condition){ return getResource(Patient.class, condition, null); }
+
     public Patient getPatientById(String index){
         return client.read().resource(Patient.class).withId(index).execute();
     }
