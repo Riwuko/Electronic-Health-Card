@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { render } from '@testing-library/react';
+import {BrowserRouter as Router} from "react-router-dom";
 
 export default class PatientItem extends Component{
 
@@ -7,10 +8,7 @@ export default class PatientItem extends Component{
         console.log(this.props.id);
         return(
             <div className="single-patient">
-                <h1>{this.props.patient.patientFullData[0]}</h1>
-                <div>{this.props.patient.patientFullData[1]}</div>
-                <div>{this.props.patient.patientFullData[2]}</div>
-                <div>{this.props.patient.patientFullData[3]}</div>
+                <h3>{this.props.patient.patientFullData[1]} {this.props.patient.patientFullData[0]} </h3>
             </div>
         )
     }
