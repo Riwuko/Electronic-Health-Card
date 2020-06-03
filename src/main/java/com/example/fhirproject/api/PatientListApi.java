@@ -37,19 +37,19 @@ public class PatientListApi {
         }
     }
 
-    @GetMapping("/search={familyname")
-    public ResponseEntity<? extends Object> patientsListFiltered(@PathVariable("familyname") String familyName) {
+    @GetMapping("/search={familyname}")
+    public ArrayList<PatientDto>  patientsListFiltered(@PathVariable("familyname") String familyName) {
         try{
             ICriterion condition = Patient.FAMILY.matches().value(familyName);
             ArrayList<Patient> patientsFilteredResources = dataServer.getPatientsFilteredData(condition);
             ArrayList<PatientDto> patientsList = (ArrayList<PatientDto>) patientsFilteredResources.stream()
                     .map(PatientDto::new)
                     .collect(Collectors.toList());
-            return new ResponseEntity<>(patientsList, HttpStatus.OK);
+            return patientsList;
 
         }catch (Exception e){
             System.out.println("Error getting Patients Data");
-            return ResponseEntity.notFound().build();
+            return new ArrayList<>();
         }
 
     }

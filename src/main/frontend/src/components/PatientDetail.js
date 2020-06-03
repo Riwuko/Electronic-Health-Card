@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { render } from '@testing-library/react';
 import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
+import axios from "axios";
 
 export default class PatientDetail extends Component{
      constructor(){
@@ -16,10 +17,11 @@ export default class PatientDetail extends Component{
     }
     renderPatientDetails = async(id) => {
             try {
-                let res = await axios.get('http://localhost:8081/patient/${id}');
+                let res = await axios.get(`http://localhost:8081/patient/${id}`);
                 this.setState({
                     patientData: res.data
                 })
+                console.log(res.data);
 
             } catch (err) {
                 console.log(err);

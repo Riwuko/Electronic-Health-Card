@@ -1,16 +1,12 @@
 package com.example.fhirproject.api;
 
 import com.example.fhirproject.dao.DataServerDao;
-import com.example.fhirproject.dto.MedicationRequestDto;
-import com.example.fhirproject.dto.ObservationDto;
-import com.example.fhirproject.dto.PatientDto;
-import com.example.fhirproject.dto.PatientFullDataDto;
+import com.example.fhirproject.dto.*;
 import org.hl7.fhir.r4.model.MedicationRequest;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +15,14 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin("*")
 public class PatientDetailApi {
 
     @Autowired
     DataServerDao dataServer;
 
     @GetMapping("patient/{id}")
-    public ResponseEntity<PatientFullDataDto> getPatientDataById(@PathVariable("id") String id) {
+    public ArrayList<ResourceDto> getPatientDataById(@PathVariable("id") String id) {
         try {
             Patient patient = dataServer.getPatientById(id);
 
@@ -41,13 +38,17 @@ public class PatientDetailApi {
                     .map(MedicationRequestDto::new)
                     .collect(Collectors.toList());
 
-            PatientFullDataDto patientFullData = new PatientFullDataDto(patientDto, cbservationList,medicationRequestList);
-            return new ResponseEntity<>(patientFullData, HttpStatus.OK);
+            ArrayList<ResourceDto> patientFullData = new ArrayList<>();
+            patientFullData.add(patientDto);
+            patientFullData.addAll(cbservationList);
+            patientFullData.addAll(medicationRequestList);
+
+            return patientFullData;
 
         } catch (Exception e) {
             System.out.println("Error getting single patient data");
         }
-        return ResponseEntity.notFound().build();
+        return null;
     }
 
 }
