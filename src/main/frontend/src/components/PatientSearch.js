@@ -4,36 +4,34 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 
 export default class PatientSearch extends Component{
+
     constructor(){
         super();
         this.state = {
             patientsList:[],
             patientInput:"",
         }
-        this.onSearchPerform = this.onSearchPerform.bind(this);
+       this.onSearchPerform = this.onSearchPerform.bind(this);
+     }
 
-    }
-
-    onSearchPerform= async(handleSearch) => {
-        this.renderPatients();
-        handleSearch(this.state.patientsList);
+    onSearchPerform() {
+        console.log(this.state.patientInput);
+        this.props.handleSearch(this.state.patientsList);
     }
 
     renderPatients = async() => {
         let res = await axios.get(`http://localhost:8081/patients/search=${this.state.patientInput}`);
         console.log(res.data);
         this.setState({
-            patientsList: res.data
+        patientsList: res.data
         });
     }
 
     render(){
 
-        const {handleSearch} = this.props;
-
         return(
         <div className="search-panel">
-        <form onSubmit={this.onSearchPerform(handleSearch)}>
+        <form onSubmit={this.onSearchPerform}>
             <input
                 type="text"
                 placeholder="Enter patient's surname..."

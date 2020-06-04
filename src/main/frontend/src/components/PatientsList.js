@@ -18,9 +18,9 @@ export default class PatientsList extends Component{
         this.handleSearch=this.handleSearch.bind(this);
     }
 
-    handleSearch(value){
+    handleSearch(searchFoundPatients){
         this.setState({
-            patientsData:value,
+            patientsData:searchFoundPatients,
         })
     }
 
@@ -73,3 +73,4 @@ export default class PatientsList extends Component{
         
     }
 }
+
