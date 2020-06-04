@@ -12,7 +12,6 @@ export default class App extends Component{
   return (
   <div className="app-container">
     <Switch>
-
     <Route path="/patients/:id" component={PatientDetail} />
     <Route path="/patients" component={PatientsList} />
     </Switch>

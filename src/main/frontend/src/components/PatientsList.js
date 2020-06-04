@@ -5,7 +5,8 @@ import {Route, Switch, Link} from "react-router-dom";
 
 //components
 import PatientItem from './PatientItem';
-import PatientDetail from './PatientDetail'
+import PatientDetail from './PatientDetail';
+import PatientSearch from './PatientSearch';
 
 export default class PatientsList extends Component{
     constructor(){
@@ -13,6 +14,14 @@ export default class PatientsList extends Component{
         this.state = {
             patientsData: [],
         };
+
+        this.handleSearch=this.handleSearch.bind(this);
+    }
+
+    handleSearch(value){
+        this.setState({
+            patientsData:value,
+        })
     }
 
     componentDidMount(){
@@ -53,6 +62,9 @@ export default class PatientsList extends Component{
         console.log(this.state.patientsData);
         return(
             <div className="patients-list">
+                <PatientSearch
+                    handleSearch = {this.handleSearch}
+                    />
                 {patients}
                 {emptyMessage}
             </div>

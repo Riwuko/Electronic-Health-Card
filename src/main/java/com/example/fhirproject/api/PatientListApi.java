@@ -38,6 +38,7 @@ public class PatientListApi {
     }
 
     @GetMapping("/search={familyname}")
+    @CrossOrigin("*")
     public ArrayList<PatientDto>  patientsListFiltered(@PathVariable("familyname") String familyName) {
         try{
             ICriterion condition = Patient.FAMILY.matches().value(familyName);
