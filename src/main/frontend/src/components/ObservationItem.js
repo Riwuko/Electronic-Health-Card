@@ -4,17 +4,19 @@ import { render } from '@testing-library/react';
 export default class ObservationItem extends Component{
 
     render(){
-        console.log(this.props);
         const observation = this.props.observationItem;
-        const items = [];
-          for (const item in observation) {
-            items.push(<li>{observation[item][0]}</li>)
-          }
-          console.log(items);
+        const observationTitle = observation[3];
+        const observationDate = observation[4];
 
         return(
             <div className="single-observation">
-                <h3></h3>
+                <li>
+                <div className="small-date"> {observationDate } </div>
+                <div> {observationTitle} </div>
+
+
+                </li>
+
             </div>
         )
     };

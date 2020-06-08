@@ -1,3 +1,5 @@
+
+
 import React, {Component} from 'react';
 import { render } from '@testing-library/react';
 import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
@@ -38,7 +40,6 @@ export default class PatientDetail extends Component{
         }
 
     setStatePatientData(){
-        console.log(this.state.patientData);
         for (const property in this.state.patientData) {
           if (typeof this.state.patientData[property].patientFullData!=="undefined"){
             this.setState({
@@ -64,7 +65,7 @@ export default class PatientDetail extends Component{
         const patient = this.state.patientPersonalData;
         return(
             <header>
-            <div className="patient-birthday">
+            <div className="small-date">
                 {patient[3]}
             </div>
             <div className="patient-name">
@@ -81,22 +82,21 @@ export default class PatientDetail extends Component{
 
         if (observation.length === 0){
             observations = [];
-            emptyMessage = "No observations...";
+            emptyMessage = "No medical report for patient...";
         }else{
             observations = observation.map((obs =>
-                <ObservationItem key={obs.id}
-                id = {obs.id}
+                <ObservationItem key={obs[0][0]}
                 observationItem = {obs}
                 />
                 ));
             emptyMessage = "";
-
          }
 
         return(
             <article>
                <ul>
                 {observations}
+                {emptyMessage}
                </ul>
             </article>
             );
@@ -112,6 +112,7 @@ export default class PatientDetail extends Component{
             <div className="single-patient-detail">
             {this.generatePatientInfo()}
             {this.generateObservationsInfo()}
+            {this.generateMedicationRequestsInfo()}
             </div>
         )
     }

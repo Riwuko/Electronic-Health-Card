@@ -9,6 +9,7 @@ public class MedicationRequestDto extends ResourceDto {
     private String status;
     private String description;
     private String date;
+    private String requester;
 
     public MedicationRequestDto(MedicationRequest resource) {
         super(resource);
@@ -16,6 +17,7 @@ public class MedicationRequestDto extends ResourceDto {
         setDescription(resource.getMedicationCodeableConcept().getText());
         if (description==null) setDescription("No description yet");
         setDate(resource.getAuthoredOnElement().toHumanDisplay());
+        setRequester(String.valueOf(resource.getRequester()));
     }
 
     public ArrayList<String> getMedicationRequestFullData() {
@@ -49,5 +51,13 @@ public class MedicationRequestDto extends ResourceDto {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getRequester() {
+        return requester;
+    }
+
+    public void setRequester(String requester) {
+        this.requester = requester;
     }
 }

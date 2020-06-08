@@ -6,35 +6,36 @@ import java.util.ArrayList;
 
 public class ObservationDto extends ResourceDto {
 
-    private String code;
+    private String value;
+    private String valueCode;
     private String description;
-    private String comment;
     private String date;
 
     public ObservationDto(Observation resource) {
         super(resource);
-        setCode(String.valueOf(resource.getValueQuantity().getValue()));
+        setValue(String.valueOf(resource.getValueQuantity().getValue()));
+        setValueCode(String.valueOf(resource.getValueQuantity().getCode()));
         setDescription(resource.getCode().getText());
         date = resource.getEffectiveDateTimeType().toHumanDisplay();
-        setComment("No comments");
+
     }
 
     public ArrayList<String> getObservationFullData() {
         ArrayList<String> observationFullData = new ArrayList<>();
         observationFullData.add(super.getId());
-        observationFullData.add(code);
-        observationFullData.add(comment);
+        observationFullData.add(value);
+        observationFullData.add(valueCode);
         observationFullData.add(description);
         observationFullData.add(date);
         return observationFullData;
     }
 
-    public String getCode() {
-        return code;
+    public String getValue() {
+        return value;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getDescription() {
@@ -45,11 +46,11 @@ public class ObservationDto extends ResourceDto {
         this.description = description;
     }
 
-    public String getComment() {
-        return comment;
+    public String getValueCode() {
+        return valueCode;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setValueCode(String valueCode) {
+        this.valueCode = valueCode;
     }
 }
