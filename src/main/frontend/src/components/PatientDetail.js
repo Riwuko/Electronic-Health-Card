@@ -1,8 +1,6 @@
 
 
 import React, {Component} from 'react';
-import { render } from '@testing-library/react';
-import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
 import axios from "axios";
 
 //components
@@ -103,11 +101,10 @@ export default class PatientDetail extends Component{
     }
 
     generateMedicationRequestsInfo(){
-        console.log(this.state.medicationRequestData);
+        console.log("medyki",this.state.medicationRequestData);
     }
 
     render(){
-
         return(
             <div className="single-patient-detail">
             {this.generatePatientInfo()}

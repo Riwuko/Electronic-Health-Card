@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import { render } from '@testing-library/react';
-import {Route, Switch, Link} from "react-router-dom";
 
 //components
 import PatientItem from './PatientItem';
-import PatientDetail from './PatientDetail';
 import PatientSearch from './PatientSearch';
 
 export default class PatientsList extends Component{

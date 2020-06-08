@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import { render } from '@testing-library/react';
 import {Link} from "react-router-dom";
 
 //components
-import PatientDetail from "./PatientDetail";
 
 export default class PatientItem extends Component{
 

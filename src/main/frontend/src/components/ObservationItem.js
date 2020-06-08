@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { render } from '@testing-library/react';
 
 export default class ObservationItem extends Component{
 
@@ -13,8 +12,6 @@ export default class ObservationItem extends Component{
                 <li>
                 <div className="small-date"> {observationDate } </div>
                 <div> {observationTitle} </div>
-
-
                 </li>
 
             </div>
