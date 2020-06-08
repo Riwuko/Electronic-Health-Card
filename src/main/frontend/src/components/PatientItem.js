@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 
-//components
-
 export default class PatientItem extends Component{
 
     render(){

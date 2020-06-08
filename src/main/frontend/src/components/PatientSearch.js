@@ -12,17 +12,18 @@ export default class PatientSearch extends Component{
        this.onSearchPerform = this.onSearchPerform.bind(this);
      }
 
-    onSearchPerform() {
-        console.log(this.state.patientInput);
-        this.props.handleSearch(this.state.patientsList);
+
+    onSearchPerform(e) {
+        e.preventDefault();
+        this.renderPatients();
     }
 
     renderPatients = async() => {
         let res = await axios.get(`http://localhost:8081/patients/search=${this.state.patientInput}`);
-        console.log(res.data);
         this.setState({
-        patientsList: res.data
+            patientsList: res.data
         });
+        this.props.handleSearch(res.data);
     }
 
     render(){
