@@ -15,7 +15,6 @@ export default class PatientDetail extends Component{
                 patientPersonalData:[],
                 observationData:[],
                 medicationRequestData:[],
-
             };
         }
 
@@ -28,17 +27,17 @@ export default class PatientDetail extends Component{
     }
 
     renderPatientDetails = async(id) => {
-            try {
-                let res = await axios.get(`http://localhost:8081/patient/${id}`);
-                this.setState({
-                    patientData: res.data
-                })
-                this.setStatePatientData();
+        try {
+            let res = await axios.get(`http://localhost:8081/patient/${id}`);
+            this.setState({
+                patientData: res.data
+            })
+            this.setStatePatientData();
 
-            } catch (err) {
-                console.log(err);
-            }
+        } catch (err) {
+            console.log(err);
         }
+    }
 
     setStatePatientData(){
         for (const property in this.state.patientData) {
@@ -113,12 +112,25 @@ export default class PatientDetail extends Component{
             <div className="single-patient-detail">
             {this.generatePatientInfo()}
             {this.generateObservationsInfo()}
-            <Link to={{
-                pathname:`${this.state.patientId}/medications`,
-                state: {
-                    patientData: this.state.patientPersonalData,
-                    medicationRequestData : this.state.medicationRequestData} }}
-            >Check medications history</Link>
+
+            <div>
+                <Link to={{
+                    pathname:`${this.state.patientId}/medications`,
+                    state: {
+                        patientData: this.state.patientPersonalData,
+                        medicationRequestData : this.state.medicationRequestData} }}
+                >Check medications history</Link>
+            </div>
+
+            <div>
+                <Link to={{
+                        pathname:`${this.state.patientId}/parameters`,
+                        state: {
+                            patientData: this.state.patientPersonalData,
+                            observationData : this.state.observationData} }}
+                    >Check patient parameters plots</Link>
+            </div>
+
             </div>
         )
     }

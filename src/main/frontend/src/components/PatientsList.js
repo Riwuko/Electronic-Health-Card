@@ -35,9 +35,7 @@ export default class PatientsList extends Component{
         } catch (err) {
             console.log(err);
         }
-
     }
-
 
     render(){
         var patients = [];

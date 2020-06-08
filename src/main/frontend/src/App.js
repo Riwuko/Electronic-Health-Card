@@ -6,14 +6,17 @@ import { Route, Switch } from 'react-router';
 import PatientsList from "./components/PatientsList";
 import PatientDetail from './components/PatientDetail';
 import MedicationRequestDetail from './components/MedicationRequestDetail';
+import PatientParametersPlots from './components/PatientParametersPlots';
 
 export default class App extends Component{
 
   render(){
   return (
+
   <div className="app-container">
     <Switch>
     <Route path="/patients/:id/medications" component={MedicationRequestDetail} />
+    <Route path="/patients/:id/parameters" component={PatientParametersPlots} />
     <Route path="/patients/:id" component={PatientDetail} />
     <Route path="/patients" component={PatientsList} />
     </Switch>
