@@ -1,16 +1,16 @@
-
-
 import React, {Component} from 'react';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 //components
 import ObservationItem from './ObservationItem';
-import MedicationRequestItem from './MedicationRequestItem';
+
 
 export default class PatientDetail extends Component{
      constructor(){
             super()
             this.state = {
+                patientId:"",
                 patientData: [],
                 patientPersonalData:[],
                 observationData:[],
@@ -21,9 +21,12 @@ export default class PatientDetail extends Component{
 
     componentDidMount () {
         const id = this.props.match.params.id;
+        this.setState({
+            patientId : id,
+        });
         this.renderPatientDetails(id);
-
     }
+
     renderPatientDetails = async(id) => {
             try {
                 let res = await axios.get(`http://localhost:8081/patient/${id}`);
@@ -35,7 +38,6 @@ export default class PatientDetail extends Component{
             } catch (err) {
                 console.log(err);
             }
-
         }
 
     setStatePatientData(){
@@ -62,13 +64,18 @@ export default class PatientDetail extends Component{
 
     generatePatientInfo(){
         const patient = this.state.patientPersonalData;
+        const patientSurname = patient[1];
+        const patientName = patient[0];
+        const patientBirthDate = patient[3];
+        const patientGender = patient[2];
+
         return(
             <header>
             <div className="small-date">
-                {patient[3]}
+                {patientBirthDate}
             </div>
             <div className="patient-name">
-                {patient[0]} {patient[1]}, {patient[2]}
+                {patientName} {patientSurname}, {patientGender}
             </div>
             </header>
         );
@@ -78,7 +85,7 @@ export default class PatientDetail extends Component{
         const observation = this.state.observationData;
         var observations = [];
         observations = observation.map((obs =>
-            <ObservationItem key={obs[0][0]}
+            <ObservationItem key={obs[0]}
             observationItem = {obs}
             />
             ));
@@ -89,23 +96,6 @@ export default class PatientDetail extends Component{
         }
         return this.generateResourceList(observations, emptyMessage);
     }
-
-    generateMedicationRequestsInfo(){
-        const medicationRequest = this.state.medicationRequestData;
-        var medicationRequests= [];
-        medicationRequests = medicationRequest.map((meds =>
-            <MedicationRequestItem key={meds[0][0]}
-            medicationRequestItem = {meds}
-            />
-            ));
-        var emptyMessage="";
-        if (medicationRequests.length === 0){
-            emptyMessage="No medications info for this patient "
-        }
-
-        return this.generateResourceList(medicationRequests, emptyMessage);
-
-     }
 
     generateResourceList(resource, emptyMessage){
         return(
@@ -123,7 +113,12 @@ export default class PatientDetail extends Component{
             <div className="single-patient-detail">
             {this.generatePatientInfo()}
             {this.generateObservationsInfo()}
-            {this.generateMedicationRequestsInfo()}
+            <Link to={{
+                pathname:`${this.state.patientId}/medications`,
+                state: {
+                    patientData: this.state.patientPersonalData,
+                    medicationRequestData : this.state.medicationRequestData} }}
+            >Check medications history</Link>
             </div>
         )
     }
