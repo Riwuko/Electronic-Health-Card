@@ -5,6 +5,7 @@ import axios from "axios";
 
 //components
 import ObservationItem from './ObservationItem';
+import MedicationRequestItem from './MedicationRequestItem';
 
 export default class PatientDetail extends Component{
      constructor(){
@@ -76,32 +77,45 @@ export default class PatientDetail extends Component{
     generateObservationsInfo(){
         const observation = this.state.observationData;
         var observations = [];
-        var emptyMessage ="";
+        observations = observation.map((obs =>
+            <ObservationItem key={obs[0][0]}
+            observationItem = {obs}
+            />
+            ));
 
-        if (observation.length === 0){
-            observations = [];
-            emptyMessage = "No medical report for patient...";
-        }else{
-            observations = observation.map((obs =>
-                <ObservationItem key={obs[0][0]}
-                observationItem = {obs}
-                />
-                ));
-            emptyMessage = "";
-         }
+        var emptyMessage="";
+         if (observations.length === 0){
+            emptyMessage="No observations info for this patient "
+        }
+        return this.generateResourceList(observations, emptyMessage);
+    }
 
+    generateMedicationRequestsInfo(){
+        const medicationRequest = this.state.medicationRequestData;
+        var medicationRequests= [];
+        medicationRequests = medicationRequest.map((meds =>
+            <MedicationRequestItem key={meds[0][0]}
+            medicationRequestItem = {meds}
+            />
+            ));
+        var emptyMessage="";
+        if (medicationRequests.length === 0){
+            emptyMessage="No medications info for this patient "
+        }
+
+        return this.generateResourceList(medicationRequests, emptyMessage);
+
+     }
+
+    generateResourceList(resource, emptyMessage){
         return(
             <article>
                <ul>
-                {observations}
+                {resource}
                 {emptyMessage}
                </ul>
             </article>
             );
-    }
-
-    generateMedicationRequestsInfo(){
-        console.log("medyki",this.state.medicationRequestData);
     }
 
     render(){

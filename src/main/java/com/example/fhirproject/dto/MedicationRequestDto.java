@@ -17,13 +17,14 @@ public class MedicationRequestDto extends ResourceDto {
         setDescription(resource.getMedicationCodeableConcept().getText());
         if (description==null) setDescription("No description yet");
         setDate(resource.getAuthoredOnElement().toHumanDisplay());
-        setRequester(String.valueOf(resource.getRequester()));
+        setRequester(String.valueOf(resource.getRequester().getDisplay()));
     }
 
     public ArrayList<String> getMedicationRequestFullData() {
         ArrayList<String> medicationRequestFullData = new ArrayList<>();
         medicationRequestFullData.add(super.getId());
         medicationRequestFullData.add(status);
+        medicationRequestFullData.add(requester);
         medicationRequestFullData.add(description);
         medicationRequestFullData.add(date);
         return medicationRequestFullData;
