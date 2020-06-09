@@ -24,7 +24,7 @@ export default class PatientDetail extends Component{
         const patientName = patientData[0]+" "+patientData[1];
         const title = patientName+"'s "+this.state.choosenParameter+" data";
 
-        if (observationsPlotData[0].length != 0){
+        if (observationsPlotData[0].length !== 0){
             var heightData = [];
             var dateData = [];
             for (const obs of observationsPlotData){

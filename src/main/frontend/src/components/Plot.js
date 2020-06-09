@@ -3,6 +3,18 @@ import {Bar} from 'react-chartjs-2';
 
 export default class Plot extends Component{
 
+    choosePlotColors(count) {
+        const colorValues=[];
+            for (var i=0; i<count; i++){
+                const r = (Math.floor(Math.random() * (255 - 150)) + 150).toString();
+                const g = (Math.floor(Math.random() * (255 - 180)) + 180).toString();
+                const b = (Math.floor(Math.random() * (255 - 180)) + 180).toString();
+                colorValues.push("rgba("+r+","+g+","+b+",1)");
+            }
+        console.log(colorValues);
+        return colorValues;
+    }
+
     preparePlotData(props){
     console.log(props);
         const plotData = {
@@ -11,7 +23,7 @@ export default class Plot extends Component{
                 {
                     label: props.mainLabel,
                     data: props.data,
-                    backgroundColors: props.backgroundColors,
+                    backgroundColor: props.backgroundColors || this.choosePlotColors(props.labels.length),
                     maxBarThickness: 30,
                 }
             ]
@@ -24,6 +36,8 @@ export default class Plot extends Component{
         return(
             <div className="chart">
                 <Bar
+                    width={this.props.width || 100}
+                    height={this.props.height || 250}
                     data={data}
                     options={{
                         maintainAspectRatio: false,
