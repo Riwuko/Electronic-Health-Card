@@ -7,6 +7,7 @@ import PatientsList from "./components/PatientsList";
 import PatientDetail from './components/PatientDetail';
 import MedicationRequestDetail from './components/MedicationRequestDetail';
 import PatientParametersPlots from './components/PatientParametersPlots';
+import Navbar from './components/Navbar';
 
 export default class App extends Component{
 
@@ -14,6 +15,7 @@ export default class App extends Component{
   return (
 
   <div className="app-container">
+    <Navbar />
     <Switch>
     <Route path="/patients/:id/medications" component={MedicationRequestDetail} />
     <Route path="/patients/:id/parameters" component={PatientParametersPlots} />
