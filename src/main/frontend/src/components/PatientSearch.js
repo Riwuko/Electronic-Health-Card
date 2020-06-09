@@ -29,15 +29,15 @@ export default class PatientSearch extends Component{
     render(){
 
         return(
-        <div className="search-panel">
-        <form onSubmit={this.onSearchPerform}>
+        <div>
+        <form className="search-panel" onSubmit={this.onSearchPerform}>
             <input
                 type="text"
                 placeholder="Enter patient's surname..."
-                id = "search-input"
+                className = "search-input"
                 onChange={event=>this.setState({patientInput: event.target.value})}
              />
-             <button className="search-submit" type="submit"> Search patient</button>
+             <button className="search-submit" type="submit"> Search</button>
             </form>
         </div>
         );

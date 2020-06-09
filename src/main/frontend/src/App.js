@@ -16,12 +16,14 @@ export default class App extends Component{
 
   <div className="app-container">
     <Navbar />
+    <div className="container">
     <Switch>
     <Route path="/patients/:id/medications" component={MedicationRequestDetail} />
     <Route path="/patients/:id/parameters" component={PatientParametersPlots} />
     <Route path="/patients/:id" component={PatientDetail} />
     <Route path="/patients" component={PatientsList} />
     </Switch>
+</div>
   </div>
   );
   }

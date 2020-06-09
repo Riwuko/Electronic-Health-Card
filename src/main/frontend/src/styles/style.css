@@ -1,0 +1,154 @@
+
+body {
+    min-height: 100vh;
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    line-height: 75%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.navbar-top{
+    display:flex;
+    padding-bottom: 10px;
+    padding-top: 1em;
+    padding-left: 1em;
+}
+
+.navbar-top > .title {
+    width: 55%;
+    align-items: center;
+    color: white;
+}
+
+.navbar-top .link{
+    text-decoration: none;
+    color: white;
+    align-self: center;
+    margin-left: 2em;
+}
+
+.navbar-top .link:hover{
+    color: #ccc;
+}
+
+.app-container{
+    height: 100vh;
+    background: #000;
+    background-image: url(./bck.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+}
+
+
+.app-container .container{
+    margin-right: 25em;
+    background-color: #ededed;
+    height: 100%;
+
+    border-radius: 0 100px 0 0;
+    border-top: 10px solid #0de0c9;
+    border-right: 15px solid #0de0c9;
+}
+
+.search-panel {
+    margin-top: 1.5em;
+    margin-left: 22em;
+}
+
+.search-panel > .search-input{
+    width: 30%;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+}
+
+.search-panel > .search-submit{
+    border: none;
+    border-radius: 10px;
+    padding: 10px 55px 10px 55px;
+    margin-left:10px;
+    background-color:#f2ac33;
+    color: white;
+}
+.search-submit:hover{
+    background-color: #fac76e;
+}
+
+.patients-list {
+    position: fixed;
+    margin-top: 6em;
+    padding-left: 20em;
+}
+
+.patients-list .link{
+    margin-left: 1em;
+    background-color: #fff;
+    padding: 0px 10px;
+    border-radius: 20px;
+    height: 40px;
+    width: 450px;
+    align-self: center;
+    justify-content: center;
+}
+
+.patients-list .link:hover{
+    cursor: pointer;
+    color: #f2ac33;
+}
+
+.single-patient-item{
+    display: flex;
+    flex-direction: row;
+}
+
+.single-patient-detail{
+    align-self: flex-start;
+    width: 100%;
+
+}
+
+.single-observation-item{
+    padding-left: 20em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+header{
+    background: #cef5f5;
+    align-self: flex-start;
+    left: 0;
+    width: 80%;
+    border-radius: 0 1em 1em 0;
+    padding: 10px;
+}
+
+.small-date{
+    font-size: 10px;
+    padding-bottom: 5px;
+}
+
+.link-button{
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left:22em;
+    margin-bottom: 10px;
+    background-color:#f2ac33;
+    color: white;
+    width: 30%;
+}
+
+.link-button:hover{
+    background-color: #fac76e;
+}

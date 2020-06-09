@@ -56,12 +56,14 @@ export default class PatientsList extends Component{
 
         console.log(this.state.patientsData);
         return(
-            <div className="patients-list">
+            <div>
                 <PatientSearch
                     handleSearch = {this.handleSearch}
                     />
+                <div className="patients-list">
                 {patients}
                 {emptyMessage}
+                </div>
             </div>
 
         )

@@ -94,8 +94,8 @@ export default class PatientDetail extends Component{
             {this.state && this.state.patientPersonalData && <div><PatientDetailHeader patientData = {this.state.patientPersonalData}/></div> }
             {this.generateObservationsInfo()}
 
-            <div>
-                <Link to={{
+            <div className='link-button'>
+                <Link style={{color:'inherit', textDecoration: 'inherit'}} to={{
                     pathname:`${this.state.patientId}/medications`,
                     state: {
                         patientData: this.state.patientPersonalData,
@@ -103,8 +103,8 @@ export default class PatientDetail extends Component{
                 >Check medications history</Link>
             </div>
 
-            <div>
-                <Link to={{
+            <div className='link-button'>
+                <Link style={{color:'inherit', textDecoration: 'inherit'}} to= {{
                         pathname:`${this.state.patientId}/parameters`,
                         state: {
                             patientData: this.state.patientPersonalData,
