@@ -2,27 +2,9 @@ import React, {Component} from 'react';
 
 //components
 import MedicationRequestItem from './MedicationRequestItem';
+import PatientDetailHeader from './PatientDetailHeader';
 
 export default class PatientDetail extends Component{
-
-    generatePatientInfo(patientData){
-        const patient = patientData;
-        const patientSurname = patient[1];
-        const patientName = patient[0];
-        const patientBirthDate = patient[3];
-        const patientGender = patient[2];
-
-        return(
-            <header>
-            <div className="small-date">
-                {patientBirthDate}
-            </div>
-            <div className="patient-name">
-                {patientName} {patientSurname}, {patientGender}
-            </div>
-            </header>
-        );
-        }
 
     generateMedicationRequestsInfo(medicationRequestData){
         const medicationRequest = medicationRequestData;
@@ -57,7 +39,7 @@ export default class PatientDetail extends Component{
 
         return(
             <div className="single-medication-request-detail">
-            {this.generatePatientInfo(patientData)}
+             <PatientDetailHeader patientData = {patientData}/>
             {this.generateMedicationRequestsInfo(medicationRequestData)}
             </div>
         )

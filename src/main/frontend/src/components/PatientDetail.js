@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 //components
 import ObservationItem from './ObservationItem';
-
+import PatientDetailHeader from './PatientDetailHeader';
 
 export default class PatientDetail extends Component{
      constructor(){
@@ -61,25 +61,6 @@ export default class PatientDetail extends Component{
         }
     }
 
-    generatePatientInfo(){
-        const patient = this.state.patientPersonalData;
-        const patientSurname = patient[1];
-        const patientName = patient[0];
-        const patientBirthDate = patient[3];
-        const patientGender = patient[2];
-
-        return(
-            <header>
-            <div className="small-date">
-                {patientBirthDate}
-            </div>
-            <div className="patient-name">
-                {patientName} {patientSurname}, {patientGender}
-            </div>
-            </header>
-        );
-    }
-
     generateObservationsInfo(){
         const observation = this.state.observationData;
         var observations = [];
@@ -110,7 +91,7 @@ export default class PatientDetail extends Component{
     render(){
         return(
             <div className="single-patient-detail">
-            {this.generatePatientInfo()}
+            {this.state && this.state.patientPersonalData && <div><PatientDetailHeader patientData = {this.state.patientPersonalData}/></div> }
             {this.generateObservationsInfo()}
 
             <div>
