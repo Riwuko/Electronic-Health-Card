@@ -56,13 +56,13 @@ export default class PatientsList extends Component{
 
         console.log(this.state.patientsData);
         return(
-            <div>
+            <div className='main-panel'>
                 <PatientSearch
                     handleSearch = {this.handleSearch}
                     />
                 <div className="patients-list">
                 {patients}
-                {emptyMessage}
+                <div className='empty-message'>{emptyMessage}</div>
                 </div>
             </div>
 

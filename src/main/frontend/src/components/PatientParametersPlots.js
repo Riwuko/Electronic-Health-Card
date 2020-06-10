@@ -140,17 +140,21 @@ export default class PatientDetail extends Component{
         const min="1980-01-01";
         return(
             <div className="plot-dates-range">
+                <div>
                 <label className="date-label">From: </label>
                 <input type="date" className="date-picker" min={min} max={today} defaultValue={min}
                     onChange={event=>this.handleDatesRange(event.target.value,null)} />
+                    </div><div>
                 <label className="date-label">To: </label>
                 <input type="date" className="date-picker" min={min} max={today} defaultValue={today}
                      onChange={event=>this.handleDatesRange(null,event.target.value)} />
+                     </div>
             </div>
             );
     }
 
     render(){
+        if (this.props.location.state.observationData !== undefined){
         const observationsData = this.props.location.state.observationData;
         const patientData = this.props.location.state.patientData;
         const plotData = this.generateObservationPlotData(observationsData,patientData);
@@ -158,6 +162,7 @@ export default class PatientDetail extends Component{
         return(
             <div>
              <PatientDetailHeader patientData = {patientData}/>
+             <div className='plot-section'>
              {this.selectParameterToPlot(observationsData)}
             <Plot
                 title = {plotData[0]}
@@ -167,7 +172,11 @@ export default class PatientDetail extends Component{
             />
             {this.selectPlotDatesRange()}
             </div>
+            </div>
         )
     }
+    else return (<div className='error-message'>Error when getting patient data to plot...</div>);
+
+}
 
 }

@@ -36,7 +36,7 @@ export default class Plot extends Component{
         return(
             <div className="chart">
                 <Bar
-                    width={this.props.width || 100}
+                    width={this.props.width || 1000}
                     height={this.props.height || 250}
                     data={data}
                     options={{

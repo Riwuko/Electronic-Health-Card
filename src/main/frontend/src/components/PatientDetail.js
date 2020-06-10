@@ -43,7 +43,7 @@ export default class PatientDetail extends Component{
         for (const property in this.state.patientData) {
           if (typeof this.state.patientData[property].patientFullData!=="undefined"){
             this.setState({
-                patientPersonalData: this.state.patientData[property].patientFullData,
+                patientPersonalData: [...this.state.patientData[property].patientFullData, this.state.patientData[property].id],
             });
             }
           else if (typeof this.state.patientData[property].observationFullData!=="undefined"){
@@ -64,9 +64,11 @@ export default class PatientDetail extends Component{
     generateObservationsInfo(){
         const observation = this.state.observationData;
         var observations = [];
+        var count=0;
         observations = observation.map((obs =>
             <ObservationItem key={obs[0]}
             observationItem = {obs}
+            number = {count++%2}
             />
             ));
 
@@ -79,10 +81,10 @@ export default class PatientDetail extends Component{
 
     generateResourceList(resource, emptyMessage){
         return(
-            <article>
+            <article className="resource-list">
                <ul>
                 {resource}
-                {emptyMessage}
+                <div className='empty-message'>{emptyMessage}</div>
                </ul>
             </article>
             );
@@ -90,8 +92,9 @@ export default class PatientDetail extends Component{
 
     render(){
         return(
+            <div>
+             <div><PatientDetailHeader patientData = {this.state.patientPersonalData}/></div>
             <div className="single-patient-detail">
-            {this.state && this.state.patientPersonalData && <div><PatientDetailHeader patientData = {this.state.patientPersonalData}/></div> }
             {this.generateObservationsInfo()}
 
             <div className='link-button'>
@@ -104,12 +107,13 @@ export default class PatientDetail extends Component{
             </div>
 
             <div className='link-button'>
-                <Link style={{color:'inherit', textDecoration: 'inherit'}} to= {{
+                 <Link style={{color:'inherit', textDecoration: 'inherit'}} to= {{
                         pathname:`${this.state.patientId}/parameters`,
                         state: {
                             patientData: this.state.patientPersonalData,
                             observationData : this.state.observationData} }}
                     >Check patient parameters plots</Link>
+            </div>
             </div>
 
             </div>

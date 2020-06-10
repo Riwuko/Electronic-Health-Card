@@ -24,25 +24,27 @@ export default class PatientDetail extends Component{
 
     generateResourceList(resource, emptyMessage){
         return(
-            <article>
+            <article className="resource-list">
                <ul>
                 {resource}
-                {emptyMessage}
+                <div className='empty-message'>{emptyMessage}</div>
                </ul>
             </article>
             );
     }
 
     render(){
+    if (this.props.location.state.medicationRequestData !== undefined){
         const medicationRequestData = this.props.location.state.medicationRequestData;
         const patientData = this.props.location.state.patientData;
 
         return(
-            <div className="single-medication-request-detail">
+            <div className="medication-request-list">
              <PatientDetailHeader patientData = {patientData}/>
             {this.generateMedicationRequestsInfo(medicationRequestData)}
             </div>
         )
+    } else return(<div className='empty-message'>Error when getting patient data for medication list...</div>);
     }
 
 }

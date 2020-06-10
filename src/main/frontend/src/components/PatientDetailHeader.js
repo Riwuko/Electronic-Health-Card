@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from "react-router-dom";
 
 export default class PatientDetailHeader extends Component{
 
@@ -8,11 +9,13 @@ export default class PatientDetailHeader extends Component{
         var patientName = "";
         var patientBirthDate = "";
         var patientGender = "";
+        var patientId="";
         if (this.props.patientData !== undefined){
             patientSurname = patient[1];
             patientName = patient[0];
             patientBirthDate = patient[3];
             patientGender = patient[2];
+            patientId = patient[4];
         }
         return(
             <header>
@@ -20,7 +23,7 @@ export default class PatientDetailHeader extends Component{
                 {patientBirthDate}
             </div>
             <div className="patient-name">
-                {patientName} {patientSurname}, {patientGender}
+               <span className="link"> <Link to={`/patients/${patientId}`} style={{color:'inherit', textDecoration: 'inherit'}}> {patientName} {patientSurname}</Link></span>, {patientGender}
             </div>
             </header>
         );

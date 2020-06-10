@@ -1,18 +1,48 @@
+html, body, .app-container{
+  min-height: 100vh;
+}
 
-body {
-    min-height: 100vh;
+body{
     margin: 0 auto;
     font-family: sans-serif;
+    background-color: black;
 }
 
 div {
     display: flex;
     flex-direction: column;
-    line-height: 75%;
+    line-height: 100%;
 }
 
-ul {
+li {
   list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 500px;
+  background-color: #fff;
+  border-radius: 20px;
+  height: 40px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.li-odd{
+    justify-content: flex-end;
+    padding-right: 10px;
+
+}
+
+.li-even{
+    margin-left: 560px;
+    position: absolute;
+    padding-left: 10px;
+
+}
+
+.li-even-img{
+    margin-left: 510px;
+    position: absolute;
 }
 
 .navbar-top{
@@ -20,10 +50,11 @@ ul {
     padding-bottom: 10px;
     padding-top: 1em;
     padding-left: 1em;
+    width: 70%;
 }
 
 .navbar-top > .title {
-    width: 55%;
+    width: 90%;
     align-items: center;
     color: white;
 }
@@ -40,41 +71,52 @@ ul {
 }
 
 .app-container{
-    height: 100vh;
     background: #000;
     background-image: url(./bck.jpg);
-    background-size: cover;
+
     background-attachment: fixed;
     background-repeat: no-repeat;
-
+    background-size: cover;
+    display: -ms-flex; display: -webkit-flex; display: flex;
 }
 
 
-.app-container .container{
-    margin-right: 25em;
+.app-container > .container{
+    width: 75%;
     background-color: #ededed;
-    height: 100%;
+
+    background: #cef5f5; /* Old browsers */
+    background: -moz-linear-gradient(top, #cef5f5 9%, #ededed 9%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #cef5f5 9%,#ededed 9%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #cef5f5 9%,#ededed 9%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cef5f5', endColorstr='#ededed',GradientType=0 );
 
     border-radius: 0 100px 0 0;
     border-top: 10px solid #0de0c9;
     border-right: 15px solid #0de0c9;
+    flex:1;
+}
+
+.main-panel{
+    align-items: center;
 }
 
 .search-panel {
     margin-top: 1.5em;
-    margin-left: 22em;
+
 }
 
 .search-panel > .search-input{
-    width: 30%;
-    border-radius: 10px;
+    width: 200px;
+    border-radius: 20px;
     border: none;
     padding: 10px;
 }
 
 .search-panel > .search-submit{
+    width: 200px;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 10px 55px 10px 55px;
     margin-left:10px;
     background-color:#f2ac33;
@@ -87,7 +129,6 @@ ul {
 .patients-list {
     position: fixed;
     margin-top: 6em;
-    padding-left: 20em;
 }
 
 .patients-list .link{
@@ -112,24 +153,28 @@ ul {
 }
 
 .single-patient-detail{
-    align-self: flex-start;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.resource-list{
+    width: 90%;
+    margin-top: 2em;
 
 }
 
-.single-observation-item{
-    padding-left: 20em;
+.single-resource-item{
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
 header{
-    background: #cef5f5;
     align-self: flex-start;
-    left: 0;
-    width: 80%;
-    border-radius: 0 1em 1em 0;
+    margin-left: 1em;
+    margin-top: 1em;
     padding: 10px;
 }
 
@@ -138,17 +183,198 @@ header{
     padding-bottom: 5px;
 }
 
+.small-comment{
+    font-size: 12px;
+    padding-top: 5px;
+}
+
+
 .link-button{
     border: none;
     border-radius: 10px;
     padding: 10px;
-    margin-left:22em;
     margin-bottom: 10px;
     background-color:#f2ac33;
     color: white;
     width: 30%;
+    align-items:center;
 }
 
 .link-button:hover{
     background-color: #fac76e;
+}
+
+
+.plot-section{
+    margin: 10px;
+    margin-left: 20px;
+    align-items: center;
+}
+
+.select-label{
+    margin-top: 40px;
+    margin-bottom: 10px;
+    align-self: center;
+}
+.parameters-to-plot{
+    width: 400px;
+    padding: 5px;
+    border-radius: 20px;
+    border: none;
+}
+
+.plot-dates-range{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+.plot-dates-range > div{
+    margin: 10px;
+    width: 200px;
+}
+
+.chart{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width:100%;
+}
+
+.patient-name{
+    display:flex;
+    flex-direction: row;
+}
+.error-message{
+    align-self: center;
+    color: red;
+    margin: 20px;
+}
+
+@media screen and (max-width: 1500px) {
+  .app-container > .container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .app-container > .container {
+    width: 80%;
+  }
+  .app-container{
+    background-size: 90%;
+    background-position: right bottom;
+  }
+
+  .single-patient-detail{
+      margin-top: 0px;
+  }
+
+
+   li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        font-size: 17px;
+        background: none;
+      }
+
+      .li-odd{
+          justify-content: center;
+          margin:0;
+          padding:0;
+          padding-right: 10px;
+          padding-left: 10px;
+          padding-bottom: 20px;
+          padding-top: 20px;
+          position: relative;
+          background: white;
+      }
+
+      .li-even{
+          justify-content: center;
+          margin:0;
+          padding:0;
+          padding-right: 10px;
+          padding-left: 10px;
+          padding-bottom: 20px;
+          padding-top: 20px;
+          position: relative;
+          background: white;
+      }
+
+      .single-resource-item{
+          margin-bottom: 0px;
+      }
+
+      .single-resource-item > img{
+          margin:0;
+          padding:0;
+          position: relative;
+          height: 90px;
+          width: 75px;
+      }
+
+      .small-date{
+          align-self: center;
+      }
+
+      header{
+          align-self: center;
+          justify-content: center;
+          align-items: center;
+          margin: 0;
+          margin-top: 2em;
+          padding: 0px;
+          font-size: 20px;
+      }
+
+      .link-button{
+          padding: 15px;
+          margin-bottom: 20px;
+          width: 80%;
+          align-items:center;
+      }
+
+}
+
+@media screen and (max-width: 1000px) {
+  .app-container > .container {
+    width: 80%;
+  }
+
+}
+
+@media screen and (max-width: 800px) {
+  .app-container > .container {
+    width: 100%;
+    border-right: 0;
+    background:#ededed;
+  }
+
+    .app-container{
+      background:#000;
+    }
+
+    .chart{
+        width: 50%;
+    }
+
+    .navbar-top{
+        display:flex;
+        padding-bottom: 10px;
+        padding-top: 1em;
+        padding-left: 1em;
+        width: 100%;
+    }
+
+    .navbar-top > .title {
+        width: 70%;
+        align-items: center;
+    }
+    .navbar-top  h1{
+        font-size: 20px;
+    }
+
+
+
 }
