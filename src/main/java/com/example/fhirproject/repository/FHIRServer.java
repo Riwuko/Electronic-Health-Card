@@ -56,11 +56,9 @@ public class FHIRServer implements DataServerRepository {
     private <T> ArrayList<T> getResource(Class<T> resource, ICriterion condition, IParam param){
         try {
             Bundle queryResults = executeQuery(resource,condition,param);
-            System.out.println(queryResults);
             ArrayList<Resource> resourcesArray = queryResults.getEntry().stream()
                     .map(Bundle.BundleEntryComponent::getResource)
                     .collect(Collectors.toCollection(ArrayList::new));
-            System.out.println(resourcesArray);
             return (ArrayList<T>) resourcesArray;
         }catch (Exception e){
             System.out.println("Exception when getting Bundle");
@@ -70,7 +68,6 @@ public class FHIRServer implements DataServerRepository {
     }
 
     private <T> Bundle executeQuery(Class<T> resource, ICriterion condition, IParam param){
-        System.out.println(client==null);
         IQuery <IBaseBundle> query = client
                 .search()
                 .forResource((Class<? extends IBaseResource>) resource);

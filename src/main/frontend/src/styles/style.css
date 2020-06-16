@@ -337,6 +337,8 @@ header{
       }
 
       header{
+          display: flex;
+          flex-direction: column;
           align-self: center;
           justify-content: center;
           align-items: center;
@@ -352,6 +354,55 @@ header{
           width: 80%;
           align-items:center;
       }
+
+
+    .main-panel{
+        width: 80vw;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+    }
+
+    .search-panel {
+        width: 70vw;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .search-panel > .search-input{
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    .search-panel > .search-submit{
+        width: 100%;
+    }
+
+    .patients-list {
+        position: relative;
+        margin-top: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        display: flex;
+
+    }
+
+    .patients-list .link{
+        background-color: #fff;
+        padding: 0px 10px;
+        margin: 0px;
+        width: 100%;
+        align-self: center;
+        position: relative;
+    }
+
+    .single-patient-item  img{
+      height: 90px;
+      width: 75px;
+      position: relative;
+  }
+
 
 }
 
@@ -374,7 +425,17 @@ header{
     }
 
     .chart{
-        width: 50%;
+        width: 100%;
+    }
+
+    .plot-dates-range{
+        flex:1;
+        display: flex;
+        flex-direction: row;
+    }
+    .plot-dates-range > div{
+        margin: 1px;
+        width: 100%;
     }
 
     .navbar-top{
@@ -388,6 +449,7 @@ header{
     .navbar-top > .title {
         width: 70%;
         align-items: center;
+
     }
     .navbar-top  h1{
         font-size: 20px;
