@@ -9,9 +9,11 @@ export default class PatientDetail extends Component{
     generateMedicationRequestsInfo(medicationRequestData){
         const medicationRequest = medicationRequestData;
         var medicationRequests= [];
+        var count=0;
         medicationRequests = medicationRequest.map((meds =>
             <MedicationRequestItem key={meds[0][0]}
             medicationRequestItem = {meds}
+            number = {count++%2}
             />
             ));
         var emptyMessage="";
@@ -39,10 +41,12 @@ export default class PatientDetail extends Component{
         const patientData = this.props.location.state.patientData;
 
         return(
-            <div className="medication-request-list">
-             <PatientDetailHeader patientData = {patientData}/>
+        <div>
+         <PatientDetailHeader patientData = {patientData}/>
+            <div className="single-patient-detail">
             {this.generateMedicationRequestsInfo(medicationRequestData)}
             </div>
+        </div>
         )
     } else return(<div className='empty-message'>Error when getting patient data for medication list...</div>);
     }

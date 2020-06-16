@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Select from 'react-select';
 
 //components
 import Plot from './Plot';
@@ -11,28 +12,51 @@ export default class PatientDetail extends Component{
         const min="1980-01-01";
 
         this.state = {
-            choosenParameter:"Body Weight",
+            choosenParameter:"",
             dateFrom:min,
             dateTo:today,
         };
+
+    }
+
+    generateFakeData(origData){
+        const fakeData = [...origData,
+        [
+            "1a","85","kg","Body Weight","29 mar 2019, 21:26:06",
+        ],
+        [
+            "1b", "81","kg","Body Weight","8 kwi 2019, 21:26:06",
+        ],
+        [
+            "1c","88","kg","Body Weight","8 maj 2019, 21:26:06",
+        ],
+        [
+            "1d","89","kg","Body Weight","8 cze 2019, 21:26:06",
+        ],
+        [
+            "1e","90","kg","Body Weight","8 lip 2019, 21:26:06",
+        ],
+        ]
+        console.log(fakeData);
+        return fakeData;
     }
 
     generateObservationPlotData(observationsData, patientData){
-        console.log(observationsData);
-        const observationsPlotData = [this.filterObservationData(observationsData,this.state.choosenParameter)];
+        observationsData = this.generateFakeData(observationsData);
+        const observationsPlotData = this.filterObservationData(observationsData,this.state.choosenParameter);
 
         const patientName = patientData[0]+" "+patientData[1];
         const title = patientName+"'s "+this.state.choosenParameter+" data";
 
-        if (observationsPlotData[0].length !== 0){
+
+        if (observationsPlotData[0] !== undefined){
             var heightData = [];
             var dateData = [];
             for (const obs of observationsPlotData){
-               heightData.push(obs[0][1]);
-               dateData.push(obs[0][4].slice(0,-10));
+               heightData.push(obs[1]);
+               dateData.push(obs[4].slice(0,-10));
             }
-
-            const mainLabel = observationsPlotData[0][0][2];
+            const mainLabel = observationsPlotData[0][2];
             return [title,mainLabel,dateData,heightData];
         } else return [title];
      }
@@ -44,8 +68,9 @@ export default class PatientDetail extends Component{
         var filteredData = [];
         for (const obs of observationsData){
             const obsDate = new Date(this.handlePolishDate(obs[4]));
-            if(obs[3]===value && obsDate >= dateFrom && obsDate <= dateTo)
+            if(obs[3]===value && obsDate >= dateFrom && obsDate <= dateTo){
                 filteredData.push(obs);
+                }
         }
         return filteredData;
        }
@@ -98,23 +123,56 @@ export default class PatientDetail extends Component{
      }
 
     selectParameterToPlot(observationsData){
-        var options=[];
+        var options2=[];
         for (const obs of observationsData){
             if(obs[1]!=='null'){
-                options.push(
+                options2.push(
                     <option key={obs[3]} value={obs[3]}>{obs[3]}</option>
                 )
             }
         }
+
+    var options=[];
+            for (const obs of observationsData){
+                if(obs[1]!=='null'){
+                    options.push(
+                        {value: obs[3], label: obs[3] }
+                    )
+                }
+        }
+
+    const styles = {
+      container: (provided) => ({
+        ...provided,
+        display: 'inline-block',
+        position:'relative',
+        minWidth: '250px',
+        minHeight: '1px',
+        textAlign: 'left',
+        border: 'none',
+      }),
+      control: (provided) => ({
+        ...provided,
+        border: '2px solid #757575',
+        borderRadius: '20px',
+        minHeight: '1px',
+        height: '42px',
+      }),
+
+    };
        return(
-        <div>
+        <div className = 'select-parameters'>
             <div>
                 <label className="select-label" >Choose a parameter to plot:</label>
             </div>
             <div>
-                <select className="parameters-to-plot" id="parametersToPlot" onChange={event=>this.setState({choosenParameter: event.target.value})}>
-                  {options}
-                </select>
+                <Select
+                    defaultValue={options.filter(({value}) => value === options[0].value)}
+                    className="parameters-to-plot"
+                    onChange={event=>this.setState({choosenParameter: event.value})}
+                    options={options}
+                    styles={styles}
+                    />
             </div>
         </div>
         )
@@ -156,24 +214,30 @@ export default class PatientDetail extends Component{
     render(){
         if (this.props.location.state.observationData !== undefined){
         const observationsData = this.props.location.state.observationData;
+        if (this.state.choosenParameter==="")
+            this.setState({
+                choosenParameter: observationsData[0][3]
+            })
         const patientData = this.props.location.state.patientData;
         const plotData = this.generateObservationPlotData(observationsData,patientData);
 
-        return(
-            <div>
-             <PatientDetailHeader patientData = {patientData}/>
-             <div className='plot-section'>
-             {this.selectParameterToPlot(observationsData)}
-            <Plot
-                title = {plotData[0]}
-                mainLabel = {plotData[1]}
-                labels = {plotData[2]}
-                data = {plotData[3]}
-            />
-            {this.selectPlotDatesRange()}
-            </div>
-            </div>
-        )
+        if (this.state.choosenParameter!=="") {
+            return(
+                <div>
+                 <PatientDetailHeader patientData = {patientData}/>
+                 <div className='plot-section'>
+                 {this.selectParameterToPlot(observationsData)}
+                <Plot
+                    title = {plotData[0]}
+                    mainLabel = {plotData[1]}
+                    labels = {plotData[2]}
+                    data = {plotData[3]}
+                />
+                {this.selectPlotDatesRange()}
+                </div>
+                </div>
+            )
+        }else return(<div className='empty-message'>No plot data...</div>);
     }
     else return (<div className='error-message'>Error when getting patient data to plot...</div>);
 
