@@ -1,4 +1,4 @@
-package com.example.fhirproject.service;
+package com.example.fhirproject.repository;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.api.EncodingEnum;
@@ -6,19 +6,18 @@ import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.gclient.ICriterion;
 import ca.uhn.fhir.rest.gclient.IParam;
 import ca.uhn.fhir.rest.gclient.IQuery;
-import com.example.fhirproject.dao.DataServerDao;
 import org.hl7.fhir.instance.model.api.IBaseBundle;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.*;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-@Service
-public class FHIRServer implements DataServerDao {
+@Repository
+public class FHIRServer implements DataServerRepository {
 
     private FhirContext ctx;
     private IGenericClient client;

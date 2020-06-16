@@ -1,13 +1,15 @@
-package com.example.fhirproject.dao;
+package com.example.fhirproject.repository;
 
 import ca.uhn.fhir.rest.gclient.ICriterion;
 import org.hl7.fhir.r4.model.MedicationRequest;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 
-public interface DataServerDao {
+@Repository
+public interface DataServerRepository {
 
     ArrayList<Patient> getPatientsData();
 

@@ -1,12 +1,10 @@
 package com.example.fhirproject.api;
 
 import ca.uhn.fhir.rest.gclient.ICriterion;
-import com.example.fhirproject.dao.DataServerDao;
+import com.example.fhirproject.repository.DataServerRepository;
 import com.example.fhirproject.dto.PatientDto;
 import org.hl7.fhir.r4.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ import java.util.stream.Collectors;
 public class PatientListApi {
 
     @Autowired
-    DataServerDao dataServer;
+    DataServerRepository dataServer;
 
     ArrayList<PatientDto> patientsList;
 

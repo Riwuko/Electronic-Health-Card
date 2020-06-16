@@ -1,6 +1,6 @@
 package com.example.fhirproject.api;
 
-import com.example.fhirproject.dao.DataServerDao;
+import com.example.fhirproject.repository.DataServerRepository;
 import com.example.fhirproject.dto.*;
 import org.hl7.fhir.r4.model.MedicationRequest;
 import org.hl7.fhir.r4.model.Observation;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class PatientDetailApi {
 
     @Autowired
-    DataServerDao dataServer;
+    DataServerRepository dataServer;
 
     @GetMapping("patient/{id}")
     public ArrayList<ResourceDto> getPatientDataById(@PathVariable("id") String id) {
